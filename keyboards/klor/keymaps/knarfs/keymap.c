@@ -97,7 +97,7 @@ enum custom_keycodes {
 #ifdef AUDIO_ENABLE
   #define WINXP_SOUND W__NOTE(_DS6), Q__NOTE(_DS5), H__NOTE(_AS5), H__NOTE(_GS5), H__NOTE(_DS5), H__NOTE(_DS6), H__NOTE(_AS5)
   #define MAC_SOUND S__NOTE(_CS5), B__NOTE(_C5)
- 
+
   float winxp_song[][2] = SONG(WINXP_SOUND);
   float mac_song[][2] = SONG(MAC_SOUND);
 #endif // AUDIO_ENABLE
@@ -124,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUM] = LAYOUT_polydactyl(
                   KC_F12,   KC_F7,    KC_F8,    KC_F9,    XXXXXXX,                     XXXXXXX, KC_7,     KC_8,     KC_9,     XXXXXXX,
-        XXXXXXX,  GUI_F11,  ALT_F4,   CTL_F5,   SHT_F6,   XXXXXXX,                     XXXXXXX, SHT_4,    CTL_5,    ALT_6,    KC_LGUI,  XXXXXXX,
+        XXXXXXX,  GUI_F11,  ALT_F4,   CTL_F5,   SHT_F6,   XXXXXXX,                     XXXXXXX, SHT_4,    CTL_5,    ALT_6,    KC_RGUI,  XXXXXXX,
         XXXXXXX,  KC_F10,   KC_F1,    KC_F2,    KC_F3,    XXXXXXX, KC_MUTE,   KC_MPLY, KC_0,    KC_1,     KC_2,     KC_3,     XXXXXXX,  XXXXXXX,
                                       _______,  XXXXXXX,  _______, XXXXXXX,   XXXXXXX, _______, XXXXXXX,  _______
     ),
@@ -163,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 char layer_state_str[24];
 char o_text[24] = "";
-int dmacro_num = 0; 
+int dmacro_num = 0;
 
 #ifdef DYNAMIC_MACRO_ENABLE
     char dmacro_text[4][24] = { "", "RECORDING", "STOP RECORDING",  "PLAY RECORDING"};
@@ -201,7 +201,7 @@ void matrix_scan_user(void) {
     if(dmacro_num > 0){
         if (timer_elapsed(dmacro_timer) < 3000) {
             strcpy ( o_text, dmacro_text[dmacro_num] );
-          }    
+          }
         else {
             if (dmacro_num == 1) {
                 strcpy ( o_text, dmacro_text[1] );
@@ -225,10 +225,10 @@ void render_os_lock_status(void) {
     static const char PROGMEM sep_h1[] = {0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0};
 //    static const char PROGMEM sep_h1[] = {0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0};
     static const char PROGMEM sep_h2[] = {0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0};
-    static const char PROGMEM face_1[] = {0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0xE1, 0};  
+    static const char PROGMEM face_1[] = {0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0xE1, 0};
     static const char PROGMEM face_2[] = {0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xE1, 0};
     static const char PROGMEM face_3[] = {0xE1, 0xE1, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xCC, 0xCD, 0xCE, 0xE1, 0};
-//    static const char PROGMEM face_1[] = {0x80, 0x81, 0x82, 0x83, 0x84, 0xE1, 0};  
+//    static const char PROGMEM face_1[] = {0x80, 0x81, 0x82, 0x83, 0x84, 0xE1, 0};
 //    static const char PROGMEM face_2[] = {0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xE1, 0};
     static const char PROGMEM os_m_1[] = {0x95, 0x96, 0};
     static const char PROGMEM os_m_2[] = {0xB5, 0xB6, 0};
@@ -238,7 +238,7 @@ void render_os_lock_status(void) {
     static const char PROGMEM n_lock[] = {0x91, 0x92, 0};
     static const char PROGMEM c_lock[] = {0x93, 0x94, 0};
     static const char PROGMEM b_lock[] = {0xE1, 0xE1, 0};
-    #ifdef AUDIO_ENABLE  
+    #ifdef AUDIO_ENABLE
       static const char PROGMEM aud_en[] = {0xAF, 0xB0, 0};
       static const char PROGMEM aud_di[] = {0xCF, 0xD0, 0};
     #endif
@@ -272,7 +272,7 @@ void render_os_lock_status(void) {
     oled_write_P(face_3, false);
 //    oled_write_ln_P(sep_v, false);
 
-    
+
 // lock key layer status ─────────────────────────────────┐
 
     led_t led_usb_state = host_keyboard_led_state();
@@ -297,16 +297,16 @@ void render_os_lock_status(void) {
 
     oled_write_P(sep_h2, false);
 
-    #ifndef AUDIO_ENABLE 
+    #ifndef AUDIO_ENABLE
         oled_write_P(b_lock, false);
     #endif
-    #ifndef HAPTIC_ENABLE 
+    #ifndef HAPTIC_ENABLE
         oled_write_P(b_lock, false);
     #endif
 
     #ifdef AUDIO_ENABLE // ────────────────── AUDIO
-        if (is_audio_on()) { 
-            oled_write_P(aud_en, false); 
+        if (is_audio_on()) {
+            oled_write_P(aud_en, false);
         } else {
             oled_write_P(aud_di, false);
         }
@@ -314,7 +314,7 @@ void render_os_lock_status(void) {
 
      #ifdef HAPTIC_ENABLE // ─────────────── HAPTIC
 //        oled_write_P(hap_en, false);
-        if (haptic_get_enable()) { 
+        if (haptic_get_enable()) {
             oled_write_P(hap_en, false);
         } else {
             oled_write_P(hap_di, false);
@@ -515,11 +515,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (record->event.pressed) {
             #ifdef KEYBOARD_klor_kb2040
               SEND_STRING ("qmk compile -kb klor/2040 -km default");
-            #else 
+            #else
               SEND_STRING ("qmk compile -kb klor -km default");
             #endif
-            tap_code(KC_ENTER); 
-          } 
+            tap_code(KC_ENTER);
+          }
           break;
 
 // ┌───────────────────────────────────────────────────────────┐
