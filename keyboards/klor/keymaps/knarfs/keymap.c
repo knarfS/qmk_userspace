@@ -109,22 +109,22 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTZ] = LAYOUT_polydactyl(
-                   KC_Q,    KC_W,    KC_E,     KC_R,      KC_T,                          DE_Z,      KC_U,      KC_I,     KC_O,    KC_P,
-        XXXXXXX,   GUI_A,   ALT_S,   CTL_D,    SHT_F,     KC_G,                          KC_H,      SHT_J,     CTL_K,    ALT_L,    GUI_OE,   DE_ADIA,
-        XXXXXXX,   DE_Y,    KC_X,    KC_C,     KC_V,      KC_B,     KC_MUTE,   KC_MPLY,  KC_N,      KC_M,      KC_COMM,  KC_DOT,  KC_SLSH,  DE_UDIA,
+                  KC_Q,    KC_W,    KC_E,     KC_R,      KC_T,                          DE_Z,      KC_U,      KC_I,     KC_O,    KC_P,
+        XXXXXXX,  GUI_A,   ALT_S,   CTL_D,    SHT_F,     KC_G,                          KC_H,      SHT_J,     CTL_K,    ALT_L,    GUI_OE,   DE_ADIA,
+        DE_SS,    DE_Y,    KC_X,    KC_C,     KC_V,      KC_B,     KC_MUTE,   KC_MPLY,  KC_N,      KC_M,      KC_COMM,  KC_DOT,  KC_SLSH,  DE_UDIA,
                                      MO(_SYM), KC_SPC,    MO(_NAV), LCTL_T(KC_ESC),  KC_TAB, MO(_NUM),  KC_ENT,    MO(_SYM)
     ),
 
     [_SYM] = LAYOUT_polydactyl(
-                 DE_AT,    DE_MINS,  DE_LBRC,  DE_RBRC,  DE_CIRC,                     DE_EXLM, DE_LABK,  DE_RABK,  DE_EQL,   DE_AMPR,
-        XXXXXXX, DE_BSLS,  ALT_SLSH, DE_LCBR,  DE_RCBR,  DE_ASTR,                     DE_QUES, DE_LPRN,  DE_RPRN,  DE_MINS,  DE_DQUO,  XXXXXXX,
-        DE_DEG,  DE_HASH,  DE_DLR,   DE_PIPE,  DE_TILD,  DE_GRV,  KC_MUTE,   KC_MPLY, DE_PLUS, DE_PERC,  DE_SCLN,  DE_COLN,  DE_QUOT,  XXXXXXX,
+                  DE_AT,    DE_MINS,  DE_LBRC,  DE_RBRC,  DE_CIRC,                     DE_EXLM, DE_LABK,  DE_RABK,  DE_EQL,   DE_AMPR,
+        XXXXXXX,  GUI_BSLS, ALT_SLSH, CTL_LCBR, SHT_RCBR, DE_ASTR,                     DE_QUES, SHT_LPRN, CTL_RPRN, ALT_MINS, GUI_DQUO, XXXXXXX,
+        DE_DEG,   DE_HASH,  DE_DLR,   DE_PIPE,  DE_TILD,  DE_GRV,  KC_MUTE,   KC_MPLY, DE_PLUS, DE_PERC,  DE_SCLN,  DE_COLN,  DE_QUOT,  XXXXXXX,
                                      _______,  XXXXXXX,  _______, XXXXXXX,   XXXXXXX, _______, XXXXXXX,  _______
     ),
 
     [_NUM] = LAYOUT_polydactyl(
                   KC_F12,   KC_F7,    KC_F8,    KC_F9,    XXXXXXX,                     XXXXXXX, KC_7,     KC_8,     KC_9,     XXXXXXX,
-        XXXXXXX,  GUI_F11,  ALT_F4,   CTL_F5,   SHT_F6,   XXXXXXX,                     XXXXXXX, SHT_4,    CTL_5,    ALT_6,    KC_RGUI,  XXXXXXX,
+        QK_BOOT,  GUI_F11,  ALT_F4,   CTL_F5,   SHT_F6,   XXXXXXX,                     XXXXXXX, SHT_4,    CTL_5,    ALT_6,    KC_RGUI,  XXXXXXX,
         XXXXXXX,  KC_F10,   KC_F1,    KC_F2,    KC_F3,    XXXXXXX, KC_MUTE,   KC_MPLY, KC_0,    KC_1,     KC_2,     KC_3,     XXXXXXX,  XXXXXXX,
                                       _______,  XXXXXXX,  _______, XXXXXXX,   XXXXXXX, _______, XXXXXXX,  _______
     ),
@@ -138,17 +138,55 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ H A P T I C   F E E D B A C K                                                                                                              │
-// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-// ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
+/* MOD TAP */
 
-//void keyboard_post_init_user(void) {
-//  // Call the post init code.
-//  #if HAPTIC_ENABLE
-//    haptic_disable(); // disables per key haptic feedback by default
-//  #endif //HAPTIC ENABLE
-//}
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case GUI_BSLS:
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(DE_BSLS);
+            return false;
+        }
+        break;
+    case ALT_SLSH:
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(DE_SLSH);
+            return false;
+        }
+        break;
+    case CTL_LCBR:
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(DE_LCBR);
+            return false;
+        }
+        break;
+    case SHT_RCBR:
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(DE_RCBR);
+            return false;
+        }
+        break;
+    case SHT_LPRN:
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(DE_LPRN);
+            return false;
+        }
+        break;
+    case CTL_RPRN:
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(DE_RPRN);
+            return false;
+        }
+        break;
+    case GUI_DQUO:
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(DE_DQUO);
+            return false;
+        }
+        break;
+    }
+    return true;
+}
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │ O L E D                                                                                                                                    │
@@ -157,62 +195,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef OLED_ENABLE
 
-// ┌───────────────────────────────────────────────────────────┐
-// │ d y n a m i c   m a c r o                                 │
-// └───────────────────────────────────────────────────────────┘
-
 char layer_state_str[24];
 char o_text[24] = "";
-int dmacro_num = 0;
-
-#ifdef DYNAMIC_MACRO_ENABLE
-    char dmacro_text[4][24] = { "", "RECORDING", "STOP RECORDING",  "PLAY RECORDING"};
-    static uint16_t dmacro_timer;
-    const char PROGMEM rec_ico[] = {0xD1, 0xE1, 0};
-    const char PROGMEM stop_ico[] = {0xD3, 0xE1, 0};
-    const char PROGMEM play_ico[] = {0xD2, 0xE1, 0};
-
-
-    // DYNMACRO RECORD ├─────────────────────────────────────────────────────────────┐
-    bool dynamic_macro_record_start_user(int8_t direction) {
-          dmacro_num = 1;
-        return false;
-    }
-
-    // DYNMACRO STOP RECORDING ├─────────────────────────────────────────────────────┐
-    bool dynamic_macro_record_end_user(int8_t direction) {
-          dmacro_num = 2;
-          dmacro_timer = timer_read();
-        return false;
-    }
-
-    // DYNMACRO PLAY RECORDING ├─────────────────────────────────────────────────────┐
-    bool dynamic_macro_play_user(int8_t direction) {
-          dmacro_num = 3;
-          dmacro_timer = timer_read();
-        return false;
-    }
-#endif //DYNAMIC_MACRO_ENABLE
-
 
 void matrix_scan_user(void) {
-  #ifdef DYNAMIC_MACRO_ENABLE
-    // DynMacroTimer
-    if(dmacro_num > 0){
-        if (timer_elapsed(dmacro_timer) < 3000) {
-            strcpy ( o_text, dmacro_text[dmacro_num] );
-          }
-        else {
-            if (dmacro_num == 1) {
-                strcpy ( o_text, dmacro_text[1] );
-              }
-            else {
-                strcpy ( o_text, layer_state_str );
-                dmacro_num = 0;
-              }
-          }
-      }
-   #endif //DYNAMIC_MACRO_ENABLE
+
 }
 
 
@@ -328,7 +315,7 @@ void render_os_lock_status(void) {
 
 int layerstate = 0;
 
-layer_state_t layer_state_set_kb(layer_state_t state) {
+layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
     case _QWERTZ:
         strcpy ( layer_state_str, "BASE QWERTY");
@@ -345,9 +332,7 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
     default:
         strcpy ( layer_state_str, "XXXXXX");
     }
-    if (dmacro_num < 1) {
-        strcpy ( o_text, layer_state_str );
-    }
+    strcpy ( o_text, layer_state_str );
     return state;
 }
 
@@ -356,18 +341,8 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
 // │ w r i t e   t o   o l e d                                 │
 // └───────────────────────────────────────────────────────────┘
 
-bool oled_task_kb(void) {
-    if (!oled_task_user()) {
-        return false;
-    }
+bool oled_task_user(void) {
     if (is_keyboard_master()) {  // ────────────────────────── PRIMARY SIDE
-
-        // layer status ──────────────────────────────────────────────────┐
-        #ifdef DYNAMIC_MACRO_ENABLE
-            if(dmacro_num == 1){ oled_write_P(rec_ico, false); }
-            if(dmacro_num == 2){ oled_write_P(stop_ico, false); }
-            if(dmacro_num == 3){ oled_write_P(play_ico, false); }
-        #endif //DYNAMIC_MACRO_ENABLE
 
         oled_write_ln(o_text, false);
         render_os_lock_status();
@@ -435,9 +410,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 // └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 // ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-
+//bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//    switch (keycode) {
+//
 //         case OS_SWAP:
 //             if (record->event.pressed) {
 //                 if (!keymap_config.swap_lctl_lgui) {
@@ -506,36 +481,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //                 layer_off(_ADJUST);
 //             }
 //             return false;
-
-// ┌───────────────────────────────────────────────────────────┐
-// │ q m k                                                     │
-// └───────────────────────────────────────────────────────────┘
-
-        case MAKE_H:
-          if (record->event.pressed) {
-            #ifdef KEYBOARD_klor_kb2040
-              SEND_STRING ("qmk compile -kb klor/2040 -km default");
-            #else
-              SEND_STRING ("qmk compile -kb klor -km default");
-            #endif
-            tap_code(KC_ENTER);
-          }
-          break;
-
-// ┌───────────────────────────────────────────────────────────┐
-// │ p r o d u c t i v i t y                                   │
-// └───────────────────────────────────────────────────────────┘
-
-      case KC_MPLY:
-        if (record->event.pressed) {
-//          #ifdef HAPTIC_ENABLE
-//                  drv2605l_pulse(4);
-//          #endif // HAPTIC_ENABLE
-        }
-        break;
-    }
-    return true;
-}
+//
+// // ┌───────────────────────────────────────────────────────────┐
+// // │ q m k                                                     │
+// // └───────────────────────────────────────────────────────────┘
+//
+//         case MAKE_H:
+//           if (record->event.pressed) {
+//             #ifdef KEYBOARD_klor_kb2040
+//               SEND_STRING ("qmk compile -kb klor/2040 -km default");
+//             #else
+//               SEND_STRING ("qmk compile -kb klor -km default");
+//             #endif
+//             tap_code(KC_ENTER);
+//           }
+//           break;
+//
+// // ┌───────────────────────────────────────────────────────────┐
+// // │ p r o d u c t i v i t y                                   │
+// // └───────────────────────────────────────────────────────────┘
+//
+//       case KC_MPLY:
+//         if (record->event.pressed) {
+// //          #ifdef HAPTIC_ENABLE
+// //                  drv2605l_pulse(4);
+// //          #endif // HAPTIC_ENABLE
+//         }
+//         break;
+//     }
+//     return true;
+// }
 
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
