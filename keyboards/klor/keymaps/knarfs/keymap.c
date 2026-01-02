@@ -1,31 +1,31 @@
 /*
+ * Copyright 2024 ElectronLab
+ * Copyright 2025-2026 Frank Stettner (frank-stettner@gmx.net)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-                                        █         █    █            ▄▄▄▀▀▀▀▀▀▄▄▄        █▀▀▀▀▀▀▀▀▀▀█
-                                        █        █     █          ▄▀            ▀▄      █          █
-                                        █       █      █        ▄▀                ▀▄    █          █
-                                        █      █       █        █                  █    █          █
-                                        █     █        █       █                    █   █          █
-                                        █    █         █       █                    █   █▄▄▄▄▄▄▄▄▄▄█
-                                        █   █ █        █       █                    █   █      █
-                                        █  █   █       █        █                  █    █       █
-                                        █ █     █      █        ▀▄                ▄▀    █        █
-                                        ██       █     █          ▀▄            ▄▀      █         █
-                                        █         █    █▄▄▄▄▄▄▄▄    ▀▀▀▄▄▄▄▄▄▀▀▀        █          █
-
-                                        ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-                                        D E F A U L T
-
-*/
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 #include <string.h>
 #include "keymap_german.h"
 #include "klor.h"
 
-// ┌───────────────────────────────────────────────────────────┐
-// │ d e f i n e   l a y e r s                                 │
-// └───────────────────────────────────────────────────────────┘
 
+/****************
+ * Custorm Layers
+ ****************/
 enum klor_layers {
     _QWERTZ,
     _SYM,
@@ -33,21 +33,22 @@ enum klor_layers {
     _NAV,
 };
 
-// ┌───────────────────────────────────────────────────────────┐
-// │ d e f i n e   k e y c o d e s                             │
-// └───────────────────────────────────────────────────────────┘
 
+/*****************
+ * Custom Keycodes
+ *****************/
 enum custom_keycodes {
     QWERTY = SAFE_RANGE,
     OS_SWAP,
     MAKE_H,
 };
 
-// ┌───────────────────────────────────────────────────────────┐
-// │ d e f i n e   m a c r o n a m e s                         │
-// └───────────────────────────────────────────────────────────┘
 
-// Home Row Mod Base Qwertz
+/********************
+ * Custom Macro Names
+ ********************/
+
+/* Home Row Mod Base Qwertz */
 #define GUI_A    MT(MOD_LGUI, KC_A)
 #define ALT_S    MT(MOD_LALT, KC_S)
 #define CTL_D    MT(MOD_LCTL, KC_D)
@@ -56,8 +57,7 @@ enum custom_keycodes {
 #define CTL_K    MT(MOD_RCTL, KC_K)
 #define ALT_L    MT(MOD_LALT, KC_L)
 #define GUI_OE   MT(MOD_RGUI, DE_ODIA)
-
-// Home Row Mod Symbol Layer
+/* Home Row Mod Symbol Layer */
 #define GUI_BSLS MT(MOD_LGUI, DE_BSLS)
 #define ALT_SLSH MT(MOD_LALT, DE_SLSH)
 #define CTL_LCBR MT(MOD_LCTL, DE_LCBR)
@@ -66,8 +66,7 @@ enum custom_keycodes {
 #define CTL_RPRN MT(MOD_RCTL, DE_RPRN)
 #define ALT_MINS MT(MOD_LALT, DE_MINS)
 #define GUI_DQUO MT(MOD_RGUI, DE_DQUO)
-
-// Home Row Mod Number Layer
+/* Home Row Mod Number Layer */
 #define GUI_F11  MT(MOD_LGUI, KC_F11)
 #define ALT_F4   MT(MOD_LALT, KC_F4)
 #define CTL_F5   MT(MOD_LCTL, KC_F5)
@@ -77,22 +76,9 @@ enum custom_keycodes {
 #define ALT_6    MT(MOD_LALT, KC_6)
 
 
-// ┌───────────────────────────────────────────────────────────┐
-// │ d e f i n e   s o u n d s                                 │
-// └───────────────────────────────────────────────────────────┘
-
-#ifdef AUDIO_ENABLE
-  #define WINXP_SOUND W__NOTE(_DS6), Q__NOTE(_DS5), H__NOTE(_AS5), H__NOTE(_GS5), H__NOTE(_DS5), H__NOTE(_DS6), H__NOTE(_AS5)
-  #define MAC_SOUND S__NOTE(_CS5), B__NOTE(_C5)
-
-  float winxp_song[][2] = SONG(WINXP_SOUND);
-  float mac_song[][2] = SONG(MAC_SOUND);
-#endif // AUDIO_ENABLE
-
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ K E Y M A P S                                                                                                                              │
-// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-
+/***********
+ * My Keymap
+ ***********/
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTZ] = LAYOUT_polydactyl(
@@ -125,10 +111,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-/* MOD TAP */
-
+/*****************************
+ * Customizing Keys and Macros
+ *****************************/
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+    /* This makes HRM for the symbol layer working
+     * see https://docs.qmk.fm/mod_tap#changing-tap-function
+     */
     case GUI_BSLS:
         if (record->tap.count && record->event.pressed) {
             tap_code16(DE_BSLS);
@@ -171,173 +161,208 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         }
         break;
+    /* Swap OSes */
+    case OS_SWAP:
+        if (record->event.pressed) {
+            if (!keymap_config.swap_lctl_lgui) {
+                /* MAC */
+                keymap_config.swap_lctl_lgui = true;
+                #ifdef AUDIO_ENABLE
+                PLAY_SONG(mac_song);
+                #endif
+            }
+            else {
+                /* Linux */
+                keymap_config.swap_lctl_lgui = false;
+                #ifdef AUDIO_ENABLE
+                PLAY_SONG(winxp_song);
+                #endif
+            }
+            eeconfig_update_keymap(keymap_config.raw);
+            clear_keyboard();  // ──── clear to prevent stuck keys
+            return false;
+        }
+        break;
+    /* Layers */
+    case QWERTY:
+        if (record->event.pressed) {
+            set_single_persistent_default_layer(_QWERTY);
+        }
+        return false;
+    /* QMK Stuff */
+    case MAKE_H:
+        if (record->event.pressed) {
+            SEND_STRING("qmk compile -kb klor -km default");
+            tap_code(KC_ENTER);
+        }
+        break;
     }
     return true;
 }
 
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ O L E D                                                                                                                                    │
-// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-// ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
-
-#ifdef OLED_ENABLE
-
-char layer_state_str[24];
-char o_text[24] = "";
-
-void matrix_scan_user(void) {
-
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case SHT_F:
+        return TAPPING_TERM; // - 150;
+    case SHT_J:
+        return TAPPING_TERM; // - 150;
+    default:
+        return TAPPING_TERM;
+    }
 }
 
 
-// ┌───────────────────────────────────────────────────────────┐
-// │ o l e d   g r a p h i c s                                 │
-// └───────────────────────────────────────────────────────────┘
+/***************
+ * Custom Sounds
+ ***************/
+#ifdef AUDIO_ENABLE
+    #define WINXP_SOUND W__NOTE(_DS6), Q__NOTE(_DS5), H__NOTE(_AS5), H__NOTE(_GS5), H__NOTE(_DS5), H__NOTE(_DS6), H__NOTE(_AS5)
+    #define MAC_SOUND S__NOTE(_CS5), B__NOTE(_C5)
 
+    float winxp_song[][2] = SONG(WINXP_SOUND);
+    float mac_song[][2] = SONG(MAC_SOUND);
+#endif
+
+
+/***************
+ * OLED Graphics
+ ***************/
+#ifdef OLED_ENABLE
+
+char layer_state_str[24] = "";
+
+/* Various Status Stuff */
 void render_os_lock_status(void) {
     static const char PROGMEM sep_v[] = {0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0};
     static const char PROGMEM sep_h1[] = {0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0};
-//    static const char PROGMEM sep_h1[] = {0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0};
     static const char PROGMEM sep_h2[] = {0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0xE1, 0};
     static const char PROGMEM face_1[] = {0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0xE1, 0};
     static const char PROGMEM face_2[] = {0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xE1, 0};
     static const char PROGMEM face_3[] = {0xE1, 0xE1, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xCC, 0xCD, 0xCE, 0xE1, 0};
-//    static const char PROGMEM face_1[] = {0x80, 0x81, 0x82, 0x83, 0x84, 0xE1, 0};
-//    static const char PROGMEM face_2[] = {0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xE1, 0};
-    static const char PROGMEM os_m_1[] = {0x95, 0x96, 0};
-    static const char PROGMEM os_m_2[] = {0xB5, 0xB6, 0};
-    static const char PROGMEM os_w_1[] = {0x99, 0x9A, 0};
-    static const char PROGMEM os_w_2[] = {0xB9, 0xBA, 0};
-    static const char PROGMEM s_lock[] = {0x8F, 0x90, 0};
-    static const char PROGMEM n_lock[] = {0x91, 0x92, 0};
-    static const char PROGMEM c_lock[] = {0x93, 0x94, 0};
-    static const char PROGMEM b_lock[] = {0xE1, 0xE1, 0};
+    static const char PROGMEM os_mac_1[] = {0x95, 0x96, 0};
+    static const char PROGMEM os_mac_2[] = {0xB5, 0xB6, 0};
+    static const char PROGMEM os_win_1[] = {0x97, 0x98, 0};
+    static const char PROGMEM os_win_2[] = {0xB7, 0xB8, 0};
+    static const char PROGMEM os_linux_1[] = {0x99, 0x9A, 0};
+    static const char PROGMEM os_linux_2[] = {0xB9, 0xBA, 0};
+    static const char PROGMEM os_android_1[] = {0x9B, 0x9C, 0};
+    static const char PROGMEM os_android_2[] = {0xBB, 0xBC, 0};
+    static const char PROGMEM scroll_lock[] = {0x8F, 0x90, 0};
+    static const char PROGMEM num_lock[] = {0x91, 0x92, 0};
+    static const char PROGMEM caps_lock[] = {0x93, 0x94, 0};
+    static const char PROGMEM blank_lock[] = {0xE1, 0xE1, 0};
     #ifdef AUDIO_ENABLE
-      static const char PROGMEM aud_en[] = {0xAF, 0xB0, 0};
-      static const char PROGMEM aud_di[] = {0xCF, 0xD0, 0};
+        static const char PROGMEM aud_en[] = {0xAF, 0xB0, 0};
+        static const char PROGMEM aud_di[] = {0xCF, 0xD0, 0};
     #endif
     #ifdef HAPTIC_ENABLE
-      static const char PROGMEM hap_en[] = {0xB1, 0xB2, 0};
-      static const char PROGMEM hap_di[] = {0xCF, 0xD0, 0};
+        static const char PROGMEM hap_en[] = {0xB1, 0xB2, 0};
+        static const char PROGMEM hap_di[] = {0xCF, 0xD0, 0};
     #endif
 
-// os mode status ────────────────────────────────────────┐
+    /* OS Mode Status */
 
     oled_write_ln_P(sep_v, false);
 
     if (keymap_config.swap_lctl_lgui) {
-        oled_write_P(os_m_1, false); // ──── MAC
+        oled_write_P(os_mac_1, false);
     } else {
-        oled_write_P(os_w_1, false); // ──── WIN
+        oled_write_P(os_linux_1, false);
     }
 
     oled_write_P(sep_h1, false);
     oled_write_P(face_1, false);
 
     if (keymap_config.swap_lctl_lgui) {
-        oled_write_P(os_m_2, false); // ──── MAC
+        oled_write_P(os_mac_2, false);
     } else {
-        oled_write_P(os_w_2, false); // ──── WIN
+        oled_write_P(os_linux_2, false);
     }
 
     oled_write_P(sep_h1, false);
     oled_write_P(face_2, false);
     oled_write_P(sep_h1, false);
     oled_write_P(face_3, false);
-//    oled_write_ln_P(sep_v, false);
 
-
-// lock key layer status ─────────────────────────────────┐
+    /* Lock Key Layer Status */
 
     led_t led_usb_state = host_keyboard_led_state();
 
+    /* Numlock */
     if (led_usb_state.num_lock) {
-        oled_write_P(n_lock, false); // ──── NUMLOCK
+        oled_write_P(num_lock, false);
     } else {
-        oled_write_P(b_lock, false);
+        oled_write_P(blank_lock, false);
     }
+    /* Capslock */
     if (led_usb_state.caps_lock) {
-        oled_write_P(c_lock, false); // ─── CAPSLOCK
+        oled_write_P(caps_lock, false);
     } else {
-        oled_write_P(b_lock, false);
+        oled_write_P(blank_lock, false);
     }
-    if (led_usb_state.scroll_lock) { // ─ SCROLLLOCK
-        oled_write_P(s_lock, false);
+    /* Scrolllock */
+    if (led_usb_state.scroll_lock) {
+        oled_write_P(scroll_lock, false);
     } else {
-        oled_write_P(b_lock, false);
+        oled_write_P(blank_lock, false);
     }
 
-// hardware feature status ──────────────────────────────┐
+    /* Hardware Feature Status */
 
     oled_write_P(sep_h2, false);
 
     #ifndef AUDIO_ENABLE
-        oled_write_P(b_lock, false);
+        oled_write_P(blank_lock, false);
     #endif
-    #ifndef HAPTIC_ENABLE
-        oled_write_P(b_lock, false);
-    #endif
-
-    #ifdef AUDIO_ENABLE // ────────────────── AUDIO
+    #ifdef AUDIO_ENABLE
         if (is_audio_on()) {
             oled_write_P(aud_en, false);
         } else {
             oled_write_P(aud_di, false);
         }
-    #endif // AUDIO ENABLE
+    #endif
 
-     #ifdef HAPTIC_ENABLE // ─────────────── HAPTIC
-//        oled_write_P(hap_en, false);
+    #ifndef HAPTIC_ENABLE
+        oled_write_P(blank_lock, false);
+    #endif
+    #ifdef HAPTIC_ENABLE
         if (haptic_get_enable()) {
             oled_write_P(hap_en, false);
         } else {
             oled_write_P(hap_di, false);
         }
-
-     #endif // HAPTIC ENABLE
+    #endif
 }
 
-
-// layer status ──────────────────────────────────────────┐
-
-int layerstate = 0;
-
+/* Layer status */
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
     case _QWERTZ:
-        strcpy ( layer_state_str, "BASE QWERTY");
+        strcpy(layer_state_str, "BASE QWERTY");
         break;
     case _SYM:
-        strcpy ( layer_state_str, "SYMBOLS");
+        strcpy(layer_state_str, "SYMBOLS");
         break;
     case _NUM:
-        strcpy ( layer_state_str, "NUMBERS");
+        strcpy(layer_state_str, "NUMBERS");
         break;
     case _NAV:
-        strcpy ( layer_state_str, "NAVIGATION");
+        strcpy(layer_state_str, "NAVIGATION");
         break;
     default:
-        strcpy ( layer_state_str, "XXXXXX");
+        strcpy(layer_state_str, "XXXXXX");
     }
-    strcpy ( o_text, layer_state_str );
     return state;
 }
 
-
-// ┌───────────────────────────────────────────────────────────┐
-// │ w r i t e   t o   o l e d                                 │
-// └───────────────────────────────────────────────────────────┘
-
+/* Write to OLED */
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {  // ────────────────────────── PRIMARY SIDE
-
-        oled_write_ln(o_text, false);
+    if (is_keyboard_master()) {
+        /* Primary Side */
+        oled_write_ln(layer_state_str, false);
         render_os_lock_status();
-
-    } else {  // ─────────────────────────────────────────── SECONDARY SIDE
-
-        // KLOR face ─────────────────────────────────────────────────────┐
-
+    } else {
+        /* Secondary Side */
         static const char PROGMEM klor_face[] = {
            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
            0xf0, 0xf0, 0xf0, 0xf0, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
@@ -376,136 +401,13 @@ bool oled_task_user(void) {
     }
     return false;
 }
-#endif // OLED_ENABLE
+#endif
 
 
-
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case SHT_F:
-        return TAPPING_TERM - 150;
-    case SHT_J:
-        return TAPPING_TERM - 150;
-    default:
-        return TAPPING_TERM;
-    }
-}
-
-
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ M A C R O S                                                                                                                                │
-// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-// ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
-
-//bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-//    switch (keycode) {
-//
-//         case OS_SWAP:
-//             if (record->event.pressed) {
-//                 if (!keymap_config.swap_lctl_lgui) {
-//                   keymap_config.swap_lctl_lgui = true;  // ─── MAC
-//                   #ifdef AUDIO_ENABLE
-//                     PLAY_SONG(mac_song);
-//                   #endif // AUDIO_ENABLE
-//                 }
-//                 else {
-//                   keymap_config.swap_lctl_lgui = false; // ─── WIN
-//                   #ifdef AUDIO_ENABLE
-//                     PLAY_SONG(winxp_song);
-//                   #endif // AUDIO_ENABLE
-//                 }
-// //              #ifdef HAPTIC_ENABLE
-// //                drv2605l_pulse(52);
-// //              #endif // HAPTIC_ENABLE
-//             eeconfig_update_keymap(keymap_config.raw);
-//             clear_keyboard();  // ──── clear to prevent stuck keys
-//             return false;
-//           }
-
-
-// // ┌───────────────────────────────────────────────────────────┐
-// // │ l a y e r                                                 │
-// // └───────────────────────────────────────────────────────────┘
-//         case QWERTY:
-//             if (record->event.pressed) {
-//                 set_single_persistent_default_layer(_QWERTY);
-// //                #ifdef HAPTIC_ENABLE
-// //                  drv2605l_pulse(64);
-// //                #endif // HAPTIC_ENABLE
-//             }
-//             return false;
-//         case LOWER:
-//             if (record->event.pressed) {
-//                 layer_on(_LOWER);
-// //                #ifdef HAPTIC_ENABLE
-// //                  drv2605l_pulse(17);
-// //                #endif // HAPTIC_ENABLE
-//                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
-//             } else {
-//                 layer_off(_LOWER);
-//                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
-//             }
-//             return false;
-//         case RAISE:
-//             if (record->event.pressed) {
-//                 layer_on(_RAISE);
-// //                #ifdef HAPTIC_ENABLE
-// //                  drv2605l_pulse(17);
-// //                #endif // HAPTIC_ENABLE
-//                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
-//             } else {
-//                 layer_off(_RAISE);
-//                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
-//             }
-//             return false;
-//         case ADJUST:
-//             if (record->event.pressed) {
-//                 layer_on(_ADJUST);
-// //                #ifdef HAPTIC_ENABLE
-// //                  drv2605l_pulse(17);
-// //                #endif // HAPTIC_ENABLE
-//             } else {
-//                 layer_off(_ADJUST);
-//             }
-//             return false;
-//
-// // ┌───────────────────────────────────────────────────────────┐
-// // │ q m k                                                     │
-// // └───────────────────────────────────────────────────────────┘
-//
-//         case MAKE_H:
-//           if (record->event.pressed) {
-//             #ifdef KEYBOARD_klor_kb2040
-//               SEND_STRING ("qmk compile -kb klor/2040 -km default");
-//             #else
-//               SEND_STRING ("qmk compile -kb klor -km default");
-//             #endif
-//             tap_code(KC_ENTER);
-//           }
-//           break;
-//
-// // ┌───────────────────────────────────────────────────────────┐
-// // │ p r o d u c t i v i t y                                   │
-// // └───────────────────────────────────────────────────────────┘
-//
-//       case KC_MPLY:
-//         if (record->event.pressed) {
-// //          #ifdef HAPTIC_ENABLE
-// //                  drv2605l_pulse(4);
-// //          #endif // HAPTIC_ENABLE
-//         }
-//         break;
-//     }
-//     return true;
-// }
-
-
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ E N C O D E R                                                                                                                              │
-// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-// ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
-
-#if defined(ENCODER_MAP_ENABLE)
+/**********
+ * Encoders
+ **********/
+#ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_QWERTZ] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
     [_SYM] =    { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
@@ -515,18 +417,16 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 #endif
 
 
-// ┌───────────────────────────────────────────────────────────┐
-// │ c o m b o keys                                            │
-// └───────────────────────────────────────────────────────────┘
-
+/*******************
+ * Custom Combo Keys
+ *******************/
 #ifdef COMBO_ENABLE
-
 enum combos {
-  QW_ESC,
-  WE_CLOSETAB,
-  ER_LASTTAB,
-  RT_PRTSCR,
-  WR_TERMINAL,
+    QW_ESC,
+    WE_CLOSETAB,
+    ER_LASTTAB,
+    RT_PRTSCR,
+    WR_TERMINAL,
 };
 
 const uint16_t PROGMEM qw_combo[] = {KC_Q, KC_W, COMBO_END};
@@ -536,14 +436,13 @@ const uint16_t PROGMEM rt_combo[] = {KC_R, KC_T, COMBO_END};
 const uint16_t PROGMEM wr_combo[] = {KC_W, KC_R, COMBO_END};
 
 combo_t key_combos[] = {
-  [QW_ESC] = COMBO(qw_combo, KC_ESC),
-  [WE_CLOSETAB] = COMBO(we_combo, LCTL(KC_F4)),
-  [ER_LASTTAB] = COMBO(er_combo, LCTL(LSFT(KC_T))),
-  [RT_PRTSCR] = COMBO(rt_combo, KC_PSCR),
-  [WR_TERMINAL] = COMBO(wr_combo, LCTL(LALT(KC_T))),
+    [QW_ESC] =      COMBO(qw_combo, KC_ESC),
+    [WE_CLOSETAB] = COMBO(we_combo, LCTL(KC_F4)),
+    [ER_LASTTAB] =  COMBO(er_combo, LCTL(LSFT(KC_T))),
+    [RT_PRTSCR] =   COMBO(rt_combo, KC_PSCR),
+    [WR_TERMINAL] = COMBO(wr_combo, LCTL(LALT(KC_T))),
 };
-
-#endif // COMBO_ENABLE
+#endif
 /*
 
                                                        ▐█    ▟▛ ▐█     ▄▆▀▀▀▀▀▀▆▄  ▐█▀▀▀▀▀█▌
@@ -563,6 +462,4 @@ combo_t key_combos[] = {
                                                                  ████▄▄████▄▄████
 
 */
-
-
 
