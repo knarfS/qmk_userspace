@@ -27,7 +27,4 @@
  * represents the switch matrix.
  */
 
-// readability
-#define ___ KC_NO
-
 #define LAYOUT LAYOUT_polydactyl

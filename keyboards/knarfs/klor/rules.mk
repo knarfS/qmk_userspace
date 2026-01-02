@@ -14,13 +14,16 @@ LTO_ENABLE = no
 SERIAL_DRIVER = vendor
 WS2812_DRIVER = vendor
 
+# OLED
+OLED_DRIVER = ssd1306
+
 # CONVERTER - if you use a listed MCU comment the first line and uncomment the appropiate line
 #CONVERT_TO = promicro_rp2040
 #CONVERT_TO = kb2040
 #CONVERT_TO = blok
 #CONVERT_TO = elite_pi
 
-# AUDIO 
+# AUDIO
 AUDIO_DRIVER = pwm_hardware
 
 I2C_DRIVER_REQUIRED = yes
