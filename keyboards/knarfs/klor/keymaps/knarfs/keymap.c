@@ -22,16 +22,6 @@
 #include "keymap_german.h"
 #include "klor.h"
 
-#ifdef HAPTIC_ENABLE
-#include "drivers/haptic/drv2605l.h"
-#endif
-
-
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ D E F I N I T I O N S                                                                                                                      │
-// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-// ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
-
 // ┌───────────────────────────────────────────────────────────┐
 // │ d e f i n e   l a y e r s                                 │
 // └───────────────────────────────────────────────────────────┘
@@ -49,9 +39,6 @@ enum klor_layers {
 
 enum custom_keycodes {
     QWERTY = SAFE_RANGE,
-    LOWER,
-    RAISE,
-    ADJUST,
     OS_SWAP,
     MAKE_H,
 };
@@ -109,31 +96,31 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTZ] = LAYOUT_polydactyl(
-                  KC_Q,    KC_W,    KC_E,     KC_R,      KC_T,                          DE_Z,      KC_U,      KC_I,     KC_O,    KC_P,
-        XXXXXXX,  GUI_A,   ALT_S,   CTL_D,    SHT_F,     KC_G,                          KC_H,      SHT_J,     CTL_K,    ALT_L,    GUI_OE,   DE_ADIA,
-        DE_SS,    DE_Y,    KC_X,    KC_C,     KC_V,      KC_B,     KC_MUTE,   KC_MPLY,  KC_N,      KC_M,      KC_COMM,  KC_DOT,  KC_SLSH,  DE_UDIA,
-                                     MO(_SYM), KC_SPC,    MO(_NAV), LCTL_T(KC_ESC),  KC_TAB, MO(_NUM),  KC_ENT,    MO(_SYM)
+                  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                          DE_Z,     KC_U,     KC_I,     KC_O,     KC_P,
+        XXXXXXX,  GUI_A,    ALT_S,    CTL_D,    SHT_F,    KC_G,                          KC_H,     SHT_J,    CTL_K,    ALT_L,    GUI_OE,   DE_ADIA,
+        DE_SS,    DE_Y,     KC_X,     KC_C,     KC_V,     KC_B,     KC_MUTE,   KC_MPLY,  KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  DE_UDIA,
+                                      MO(_SYM), KC_SPC, MO(_NAV), LCTL_T(KC_ESC), KC_TAB, MO(_NUM), KC_ENT,  MO(_SYM)
     ),
 
     [_SYM] = LAYOUT_polydactyl(
-                  DE_AT,    DE_MINS,  DE_LBRC,  DE_RBRC,  DE_CIRC,                     DE_EXLM, DE_LABK,  DE_RABK,  DE_EQL,   DE_AMPR,
-        XXXXXXX,  GUI_BSLS, ALT_SLSH, CTL_LCBR, SHT_RCBR, DE_ASTR,                     DE_QUES, SHT_LPRN, CTL_RPRN, ALT_MINS, GUI_DQUO, XXXXXXX,
-        DE_DEG,   DE_HASH,  DE_DLR,   DE_PIPE,  DE_TILD,  DE_GRV,  KC_MUTE,   KC_MPLY, DE_PLUS, DE_PERC,  DE_SCLN,  DE_COLN,  DE_QUOT,  XXXXXXX,
-                                     _______,  XXXXXXX,  _______, XXXXXXX,   XXXXXXX, _______, XXXXXXX,  _______
+                  DE_AT,    DE_MINS,  DE_LBRC,  DE_RBRC,  DE_CIRC,                       DE_EXLM,  DE_LABK,  DE_RABK,  DE_EQL,   DE_AMPR,
+        XXXXXXX,  GUI_BSLS, ALT_SLSH, CTL_LCBR, SHT_RCBR, DE_ASTR,                       DE_QUES,  SHT_LPRN, CTL_RPRN, ALT_MINS, GUI_DQUO, XXXXXXX,
+        DE_DEG,   DE_HASH,  DE_DLR,   DE_PIPE,  DE_TILD,  DE_GRV,   KC_MUTE,   KC_MPLY,  DE_PLUS,  DE_PERC,  DE_SCLN,  DE_COLN,  DE_QUOT,  XXXXXXX,
+                                      _______,  XXXXXXX,  _______,  XXXXXXX,   XXXXXXX,  _______,  XXXXXXX,  _______
     ),
 
     [_NUM] = LAYOUT_polydactyl(
-                  KC_F12,   KC_F7,    KC_F8,    KC_F9,    XXXXXXX,                     XXXXXXX, KC_7,     KC_8,     KC_9,     XXXXXXX,
-        QK_BOOT,  GUI_F11,  ALT_F4,   CTL_F5,   SHT_F6,   XXXXXXX,                     XXXXXXX, SHT_4,    CTL_5,    ALT_6,    KC_RGUI,  XXXXXXX,
-        XXXXXXX,  KC_F10,   KC_F1,    KC_F2,    KC_F3,    XXXXXXX, KC_MUTE,   KC_MPLY, KC_0,    KC_1,     KC_2,     KC_3,     XXXXXXX,  XXXXXXX,
-                                      _______,  XXXXXXX,  _______, XXXXXXX,   XXXXXXX, _______, XXXXXXX,  _______
+                  KC_F12,   KC_F7,    KC_F8,    KC_F9,    XXXXXXX,                       XXXXXXX,  KC_7,     KC_8,     KC_9,     XXXXXXX,
+        QK_BOOT,  GUI_F11,  ALT_F4,   CTL_F5,   SHT_F6,   XXXXXXX,                       XXXXXXX,  SHT_4,    CTL_5,    ALT_6,    KC_RGUI,  XXXXXXX,
+        XXXXXXX,  KC_F10,   KC_F1,    KC_F2,    KC_F3,    XXXXXXX,  KC_MUTE,   KC_MPLY,  KC_0,     KC_1,     KC_2,     KC_3,     XXXXXXX,  XXXXXXX,
+                                      _______,  XXXXXXX,  _______,  XXXXXXX,   XXXXXXX,  _______,  XXXXXXX,  _______
     ),
 
     [_NAV] = LAYOUT_polydactyl(
-                  RM_NEXT,   RM_HUEU,  RM_SPDU,  XXXXXXX,  KC_VOLU,                       KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,     XXXXXXX,
-        RM_VALU,  KC_LGUI,   KC_LALT,  KC_LCTL,  KC_LSFT,  KC_VOLD,                       KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,    XXXXXXX,   XXXXXXX,
-        RM_VALD,  KC_PSCR,   RM_HUED,  RM_SPDD,  XXXXXXX,  KC_MUTE,  KC_MUTE,   KC_MPLY,  XXXXXXX,  KC_BSPC,  XXXXXXX,  KC_DEL,     XXXXXXX,   XXXXXXX,
-                                       _______,  XXXXXXX,  _______,  XXXXXXX,   XXXXXXX,  _______,  XXXXXXX,  _______
+                  RM_NEXT,  RM_HUEU,  RM_SPDU,  XXXXXXX,  KC_VOLU,                       KC_HOME,  KC_PGDN,  KC_PGUP,  KC_END,   XXXXXXX,
+        RM_VALU,  KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  KC_VOLD,                       KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  XXXXXXX,  XXXXXXX,
+        RM_VALD,  KC_PSCR,  RM_HUED,  RM_SPDD,  XXXXXXX,  KC_MUTE,  KC_MUTE,   KC_MPLY,  XXXXXXX,  KC_BSPC,  XXXXXXX,  KC_DEL,   XXXXXXX,  XXXXXXX,
+                                      _______,  XXXXXXX,  _______,  XXXXXXX,   XXXXXXX,  _______,  XXXXXXX,  _______
     ),
 };
 

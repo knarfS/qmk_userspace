@@ -99,16 +99,8 @@ for more options.
 #endif
 
 // Bootmagic support
-#   define BOOTMAGIC_ROW 0
-#   define BOOTMAGIC_COLUMN 1
-#   define BOOTMAGIC_ROW_RIGHT 4
-#   define BOOTMAGIC_COLUMN_RIGHT 1
+#define BOOTMAGIC_ROW 0
+#define BOOTMAGIC_COLUMN 1
+#define BOOTMAGIC_ROW_RIGHT 4
+#define BOOTMAGIC_COLUMN_RIGHT 1
 
-// Haptic support
-#ifdef HAPTIC_ENABLE
-//#   define NO_HAPTIC_ALPHA
-//#   define NO_HAPTIC_PUNCTUATION
-//#   define NO_HAPTIC_LOCKKEYS
-//#   define NO_HAPTIC_NAV
-//#   define NO_HAPTIC_NUMERIC
-#endif
