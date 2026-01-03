@@ -44,8 +44,12 @@ for more options.
 
 #define COMBO_COUNT 3
 //#define VIAL_COMBO_ENTRIES 3
+
 // RGB matrix support
 #ifdef RGB_MATRIX_ENABLE
+#    undef RGB_MATRIX_TIMEOUT
+#    define RGB_MATRIX_TIMEOUT 300000
+
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
 // https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effect
