@@ -302,6 +302,19 @@ void render_os_lock_status(void) {
 
     oled_write_ln_P(sep_v, false);
 
+    //os_variant_t detected_os = detected_host_os();
+    //switch (detected_os) {
+    //case OS_LINUX:
+    //    oled_write_P(os_linux_1, false);
+    //    break;
+    //case OS_WINDOWS:
+    //    oled_write_P(os_windows_1, false);
+    //    break;
+    //case OS_MACOS:
+    //case OS_IOS
+    //    oled_write_P(os_mac_1, false);
+    //    break;
+    //}
     if (keymap_config.swap_lctl_lgui) {
         oled_write_P(os_mac_1, false);
     } else {
