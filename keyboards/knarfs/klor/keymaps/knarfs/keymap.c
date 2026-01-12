@@ -41,6 +41,7 @@ enum klor_layers {
 enum custom_keycodes {
     LAYOUT_SWAP = SAFE_RANGE,
     OS_SWAP,
+    FS_BOOT,
     MAKE_H,
 };
 
@@ -114,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUM] = LAYOUT_polydactyl(
                   KC_F12,   KC_F7,    KC_F8,    KC_F9,    XXXXXXX,                       XXXXXXX,  KC_7,     KC_8,     KC_9,     XXXXXXX,
-        QK_BOOT,  GUI_F11,  ALT_F4,   CTL_F5,   SHT_F6,   XXXXXXX,                       XXXXXXX,  SHT_4,    CTL_5,    ALT_6,    KC_RGUI,  XXXXXXX,
+        FS_BOOT,  GUI_F11,  ALT_F4,   CTL_F5,   SHT_F6,   XXXXXXX,                       XXXXXXX,  SHT_4,    CTL_5,    ALT_6,    KC_RGUI,  XXXXXXX,
         XXXXXXX,  KC_F10,   KC_F1,    KC_F2,    KC_F3,    XXXXXXX,  KC_MUTE,   KC_MPLY,  KC_0,     KC_1,     KC_2,     KC_3,     XXXXXXX,  XXXXXXX,
                                       _______,  XXXXXXX,  _______,  XXXXXXX,   XXXXXXX,  _______,  XXXXXXX,  _______
     ),
@@ -228,10 +229,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         break;
     /* QMK Stuff */
+    case FS_BOOT:
+        if (record->event.pressed) {
+            uprintf("In FS_BOOT\n");
+            rgb_matrix_set_color_all(RGB_RED);
+            reset_keyboard();
+        }
+        break;
     case MAKE_H:
         if (record->event.pressed) {
-            SEND_STRING("qmk compile -kb klor -km default");
+            SEND_STRING("qmk flash -kb electronlab/klor -km knarfs");
             tap_code(KC_ENTER);
+            reset_keyboard();
         }
         break;
     }
